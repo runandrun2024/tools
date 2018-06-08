@@ -7,7 +7,7 @@ import datetime as dt
 
 def printusage():
     print 'timedelta.py start end'
-    print '    date format : yyyy-mm-dd hh:mm:ss.u'
+    print '    format : \'YYYY-MM-DD hh:mm:ss.SSS\' | \'[YYYY-MM-DD hh:mm:ss.SSS]\''
 
 if __name__ == '__main__':
     argvs = sys.argv  # コマンドライン引数を格納したリストの取得
@@ -17,8 +17,8 @@ if __name__ == '__main__':
         printusage()
         exit(1)
 
-    s_str = argvs[1]
-    e_str = argvs[2]
+    s_str = argvs[1].replace('[', '').replace(']', '')
+    e_str = argvs[2].replace('[', '').replace(']', '')
 
     fmt = '%Y-%m-%d  %H:%M:%S.%f'
 
@@ -26,6 +26,7 @@ if __name__ == '__main__':
     e = dt.datetime.strptime(e_str, fmt)
     d = e - s
 
-    print 'delta =', d
+    # print 'delta =', d
+    print d.total_seconds(), 'sec'
     
     exit(0)
